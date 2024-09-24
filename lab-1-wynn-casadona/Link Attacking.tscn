@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvgx0y3m6rh1v"]
+
+[ext_resource type="Texture2D" uid="uid://c1wluj8pvwcx0" path="res://17364 (1).png" id="1_luvjw"]
+
+[sub_resource type="Animation" id="Animation_lonet"]
+resource_name = "Hit_Left"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_s1c82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ia4e6"]
+_data = {
+"Hit_Left": SubResource("Animation_lonet"),
+"RESET": SubResource("Animation_s1c82")
+}
+
+[node name="Link Attacking" type="Sprite2D"]
+position = Vector2(96, 104)
+scale = Vector2(4.60811, 4.60811)
+texture = ExtResource("1_luvjw")
+hframes = 4
+frame = 1
+region_enabled = true
+region_rect = Rect2(79.4266, 42.275, 153.207, 34.3367)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ia4e6")
+}
