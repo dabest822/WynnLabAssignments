@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://pikdcl7wpt7v"]
+
+[ext_resource type="PackedScene" uid="uid://cuhdefu2rrkuu" path="res://Gibdo.tscn" id="1_l5ewl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0152q"]
+size = Vector2(73, 99)
+
+[node name="Node2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31, 15.5)
+shape = SubResource("RectangleShape2D_0152q")
+
+[node name="Gibdo" parent="CollisionShape2D" instance=ExtResource("1_l5ewl")]
+position = Vector2(-3, -4)
+scale = Vector2(1.741, 1.741)
+
+[editable path="CollisionShape2D/Gibdo"]
