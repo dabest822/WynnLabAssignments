@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbcthvslplou8"]
+
+[ext_resource type="PackedScene" uid="uid://bmsu1qywj03an" path="res://Walking, Running, Jumping, Attacking.tscn" id="1_guwcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgqhg"]
+size = Vector2(26.4, 51.1292)
+
+[node name="Node2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(75, 24)
+shape = SubResource("RectangleShape2D_dgqhg")
+
+[node name="Link" parent="CollisionShape2D" instance=ExtResource("1_guwcq")]
+position = Vector2(4.9, -1)
+scale = Vector2(1.457, 1.46)
