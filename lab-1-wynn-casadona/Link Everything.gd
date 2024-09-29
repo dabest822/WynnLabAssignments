@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+# Player attributes
 var speed = 200  # Walking speed
 var run_speed = 400  # Running speed
 var gravity = 1200  # Gravity force to pull the player down
@@ -10,6 +11,11 @@ var in_air = false  # Track if the character is mid-air
 var is_attacking = false  # Track if the player is attacking
 var facing_direction = "right"  # Track the player's facing direction
 
+# Health attributes
+var max_health = 5
+var current_health = max_health
+
+# Reference to AnimationPlayer
 var animation_player: AnimationPlayer
 
 func _ready():
@@ -36,6 +42,7 @@ func _physics_process(delta):
 	apply_movement()
 	update_animation()
 
+# Handle movement and jumping
 func handle_movement():
 	is_running = Input.is_action_pressed("run")
 	var current_speed
@@ -62,14 +69,14 @@ func handle_movement():
 		in_air = true
 		play_animation("Jump_" + facing_direction.capitalize())  # Trigger the jump animation once
 
+# Handle attacks
 func handle_attack():
-	# Handle attacking
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true
 		play_animation("Hit_" + facing_direction.capitalize())
 
+# Apply gravity when not on the ground
 func apply_gravity(delta):
-	# Apply gravity if the player is not on the floor
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
@@ -77,12 +84,12 @@ func apply_gravity(delta):
 		in_air = false
 		velocity.y = 0
 
+# Apply movement to the player
 func apply_movement():
-	# Move the player and handle collisions (no arguments required in Godot 4.x)
 	move_and_slide()
 
+# Update animations based on player actions
 func update_animation():
-	# Handle animations based on state
 	if not is_attacking:
 		if in_air:
 			# Jump animation should only play once when jump starts, not loop
@@ -99,8 +106,8 @@ func update_animation():
 	if is_attacking and animation_player and not animation_player.is_playing():
 		is_attacking = false
 
+# Play the given animation if it exists
 func play_animation(anim_name):
-	# Play the animation if it exists
 	if animation_player != null:
 		if animation_player.has_animation(anim_name):
 			animation_player.play(anim_name)
@@ -108,3 +115,39 @@ func play_animation(anim_name):
 			print("WARNING: Animation '", anim_name, "' not found!")
 	else:
 		print("ERROR: Attempted to play animation '", anim_name, "' but AnimationPlayer is null!")
+
+# Function to handle taking damage
+func take_damage(amount):
+	if current_health > 0:
+		current_health -= amount
+		if current_health < 0:
+			current_health = 0  # Health should not go below zero
+
+		# Update hearts display
+		update_health_ui()
+
+		# Check if the player is dead
+		if current_health == 0:
+			die()
+
+# Function to update the heart UI display
+func update_health_ui():
+	# Assuming there's a CanvasLayer node called HealthUI that contains the heart nodes
+	var health_ui = get_node("/root/Node2D/HealthUI")
+	if health_ui:
+		for i in range(max_health):
+			var heart = health_ui.get_child(i)
+			if i < current_health:
+				heart.visible = true
+			else:
+				heart.visible = false
+
+# Function to handle player's death
+func die():
+	print("Link has died.")
+	# Add any additional death handling logic here, such as restarting the level
+
+# Function to detect collisions with Gibdo
+func _on_body_entered(body):
+	if body.name == "Gibdo":
+		take_damage(1)

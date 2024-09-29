@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpuj0fbejjlf7"]
+
+[ext_resource type="Texture2D" uid="uid://bldexell8ws28" path="res://legend of zelda adventures of link pixel heart containers greeting card free printable easy diy geek birthday valentine's day love note geekery (2) (1) (1).png" id="1_nfv57"]
+
+[node name="Node2D" type="Sprite2D"]
+texture = ExtResource("1_nfv57")
+hframes = 3

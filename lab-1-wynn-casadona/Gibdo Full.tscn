@@ -2,17 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://cuhdefu2rrkuu" path="res://Gibdo.tscn" id="1_l5ewl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0152q"]
-size = Vector2(73, 99)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qc6la"]
+radius = 33.0
+height = 113.0
 
 [node name="Node2D" type="CharacterBody2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(31, 15.5)
-shape = SubResource("RectangleShape2D_0152q")
+shape = SubResource("CapsuleShape2D_qc6la")
 
-[node name="Gibdo" parent="CollisionShape2D" instance=ExtResource("1_l5ewl")]
+[node name="Gibdo" parent="CollisionShape2D2" instance=ExtResource("1_l5ewl")]
 position = Vector2(-3, -4)
 scale = Vector2(1.741, 1.741)
 
-[editable path="CollisionShape2D/Gibdo"]
+[editable path="CollisionShape2D2/Gibdo"]
