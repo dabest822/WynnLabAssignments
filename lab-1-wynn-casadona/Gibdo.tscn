@@ -144,7 +144,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_0f2kc"]
 resource_name = "Attack_Left"
 length = 0.25
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -185,6 +184,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [12, 14]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(6.10349e-05),
+"update": 0,
+"values": [Rect2(-2, 0, 270, 185)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qiblh"]
 _data = {
@@ -209,4 +220,4 @@ region_rect = Rect2(8, 0, 270, 185)
 libraries = {
 "": SubResource("AnimationLibrary_qiblh")
 }
-speed_scale = 0.496
+speed_scale = 0.627
