@@ -1,23 +1,29 @@
 extends CharacterBody2D
 
-var speed = 200  # Walking speed
-var run_speed = 400  # Running speed
-var gravity = 1200  # Gravity force to pull the player down
-var jump_force = -600  # Jump force to propel the player upwards
-var is_jumping = false  # Track if the player is jumping
-var in_air = false  # Track if the character is mid-air
-var is_attacking = false  # Track if the player is attacking
-var facing_direction = "right"  # Track the player's facing direction
-
+var speed = 50
+var detection_radius = 1000
+var gravity = 1200
+var attack_range = 30
+var facing_direction = "right"
 var animation_player: AnimationPlayer
+var link: Node2D
+var is_attacking = false
+var attack_cooldown = 1.0
+var attack_timer = 0.0
+var attack_duration = 0.5  # Duration of the attack animation
 
 func _ready():
-	# Find the AnimationPlayer node
+	print("Gibdo script starting...")
 	animation_player = find_animation_player(self)
 	if animation_player:
-		print("AnimationPlayer found successfully!")
+		print("AnimationPlayer found at path: ", animation_player.get_path())
+		print("Available animations: ", animation_player.get_animation_list())
 	else:
 		print("ERROR: AnimationPlayer not found in the scene tree!")
+	
+	link = get_node("/root/Node2D/Node2D/CollisionShape2D/Link")
+	if not link:
+		print("ERROR: Link not found in the scene!")
 
 func find_animation_player(node):
 	for child in node.get_children():
@@ -29,89 +35,72 @@ func find_animation_player(node):
 	return null
 
 func _physics_process(delta):
+	if not animation_player:
+		print("ERROR: AnimationPlayer is still null in _physics_process")
+		return
+	
 	apply_gravity(delta)
-	handle_movement(delta)
-	handle_attack()
-	apply_movement()
+	handle_movement_and_attack(delta)
+	move_and_slide()
 	update_animation()
 
-func handle_movement(delta):
-	var current_speed
-	if Input.is_action_pressed("run"):
-		current_speed = run_speed
-	else:
-		current_speed = speed
-
-	# Handle horizontal movement if not attacking
-	if not is_attacking:
-		if Input.is_action_pressed("ui_right"):
-			velocity.x = current_speed
-			facing_direction = "right"
-		elif Input.is_action_pressed("ui_left"):
-			velocity.x = -current_speed
-			facing_direction = "left"
-		else:
-			velocity.x = 0  # Stop movement when no input
-
-	# Handle jumping
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_force  # Start the jump with jump force
-		is_jumping = true
-		in_air = true
-		play_animation("Jump_" + facing_direction.capitalize())  # Trigger jump animation
-
-	# Handle movement while in the air
-	if is_jumping:
-		if Input.is_action_pressed("ui_right"):  # Move right while jumping
-			velocity.x = current_speed
-			facing_direction = "right"
-		elif Input.is_action_pressed("ui_left"):  # Move left while jumping
-			velocity.x = -current_speed
-			facing_direction = "left"
-
-func handle_attack():
-	# Handle attacking
-	if Input.is_action_just_pressed("attack") and not is_attacking:
-		is_attacking = true
-		play_animation("Hit_" + facing_direction.capitalize())
-
 func apply_gravity(delta):
-	# Apply gravity if the player is not on the floor
 	if not is_on_floor():
-		velocity.y += gravity * delta  # Gravity pulling down while in air
+		velocity.y += gravity * delta
 	else:
-		is_jumping = false
-		in_air = false
-		velocity.y = 0  # Reset the y-velocity when on the ground
+		velocity.y = 0
 
-func apply_movement():
-	# Apply the movement and handle collisions
-	move_and_slide()
+func handle_movement_and_attack(delta):
+	if not link:
+		return
+	
+	var to_link = link.global_position - global_position
+	var distance_to_link = to_link.length()
+	
+	facing_direction = "right" if to_link.x > 0 else "left"
+	
+	if attack_timer > 0:
+		attack_timer -= delta
+	
+	if distance_to_link <= attack_range and attack_timer <= 0:
+		is_attacking = true
+		attack_timer = attack_cooldown
+		velocity = Vector2.ZERO
+	elif is_attacking and attack_timer > attack_cooldown - attack_duration:
+		# Keep the Gibdo stationary during the attack animation
+		velocity = Vector2.ZERO
+	else:
+		is_attacking = false
+		if distance_to_link <= detection_radius:
+			velocity.x = sign(to_link.x) * speed
+		else:
+			velocity.x = 0
+	
+	print("Distance to Link: ", distance_to_link, " Velocity: ", velocity, " Facing: ", facing_direction, " Attacking: ", is_attacking, " Attack timer: ", attack_timer)
 
 func update_animation():
-	# Handle animations based on state
-	if not is_attacking:
-		if in_air:
-			# Jump animation has already been triggered in `handle_movement`
-			pass  # No need to trigger the jump animation again
-		elif velocity.x != 0:
-			if Input.is_action_pressed("run"):
-				play_animation("Run_" + facing_direction.capitalize())
-			else:
-				play_animation("Walk_" + facing_direction.capitalize())
-		else:
-			play_animation("Idle_" + facing_direction.capitalize())
-
-	# Reset the attack flag once animation finishes
-	if is_attacking and animation_player and not animation_player.is_playing():
-		is_attacking = false
-
-func play_animation(anim_name):
-	# Play the animation if it exists
-	if animation_player != null:
-		if animation_player.has_animation(anim_name):
-			animation_player.play(anim_name)
-		else:
-			print("WARNING: Animation '", anim_name, "' not found!")
+	if not animation_player:
+		print("ERROR: Cannot update animation, AnimationPlayer is null!")
+		return
+	
+	var anim_to_play = ""
+	if is_attacking and attack_timer > attack_cooldown - attack_duration:
+		anim_to_play = "Attack_" + facing_direction.capitalize()
+	elif abs(velocity.x) > 0:
+		anim_to_play = "Walk_" + facing_direction.capitalize()
 	else:
-		print("ERROR: Attempted to play animation '", anim_name, "' but AnimationPlayer is null!")
+		anim_to_play = "Idle_" + facing_direction.capitalize()
+	
+	if animation_player.has_animation(anim_to_play):
+		if animation_player.current_animation != anim_to_play or not animation_player.is_playing():
+			if anim_to_play.begins_with("Attack"):
+				# For attack animations, we'll use custom_speed to slow down the animation
+				animation_player.play(anim_to_play, -1, 1.0 / attack_duration)
+			else:
+				# For other animations, play at normal speed
+				animation_player.play(anim_to_play)
+			print("Playing new animation: ", anim_to_play)
+	else:
+		print("WARNING: Animation not found: ", anim_to_play)
+	
+	print("Final animation state - Current: ", animation_player.current_animation, " Is playing: ", animation_player.is_playing())
