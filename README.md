@@ -10,6 +10,8 @@ The hearts in the top left are meant to become empty (white-colored) if you get 
 You are placed in a forest with a mountainous background, and a platform you can climb over.
 Instantly, the enemy (a Gibdo) is slowly walking over to you autonomously.
 Ideally, you would jump over the platform and take down the Gibdo, but as of right now, all you can do is run and jump around it.
+Also, I had a Camera2D added to this project, but due to the fact that I did not expand the TileMap of the level (making it like an actual platformer), you would constantly see grey space. 
+But the Camera2D did work and follow around Link, as it was meant to. This will be something I'd add back at a later date once the level is fleshed out more.
 
 I learned a lot about Godot and game development in the past couple of weeks; originally inspired by a video series on YouTube of someone attempting to fully rebuild Super Mario World (SNES) in the Godot engine.
 It is very complex, but just like anything, practicing it more and more makes it easier. And it's free to use, which is good.
