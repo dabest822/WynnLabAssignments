@@ -4,7 +4,7 @@ But, I did all the research, finding sprites/images, creating animations, Collis
 This is something I could develop into a full 2D platformer type of game with enemies individually, but I think for my upcoming group project it's best to go with a type of game we can all agree on. 
 I might bring it up during brainstorming, but if we want to make one from scratch, that's a different type, etc. I'll be OK with that as well.
 
-To describe this project briefly, you control Link, who can walk, run, jump, and attack, or a combination of any of those actions together, like jumping and then attacking while mid-air.
+To describe this project briefly, you control Link, who can walk (left + right arrows), run (hold shift), jump (space bar), and attack (press enter), or a combination of any of those actions together, like jumping and then attacking while mid-air.
 The attacks don't have any real purpose yet, since I did not have time to develop a heart/health/damage system.
 The hearts in the top left are meant to become empty (white-colored) if you get hit by an enemy. 1 heart lost = 1 hit from an enemy, 5 hits and you "die."
 You are placed in a forest with a mountainous background, and a platform you can climb over.
