@@ -1,5 +1,5 @@
 This is my (Wynn Casadona's) submission for Lab 1 in Video Game Design.
-I took a liking to the Godot engine, so I did a bit more than the assignment required, using the help of AI for some of the advanced GDScript coding elements.
+I took a liking to the Godot engine, so I did a bit more than the assignment required, using the help of AI for some of the more advanced GDScript coding elements.
 But, I did all the research, finding sprites/images, creating animations, Collision Shapes, TileMaps, etc. myself.
 This is something I could develop into a full 2D platformer type of game with enemies individually, but I think for my upcoming group project it's best to go with a type of game we can all agree on. 
 I might bring it up during brainstorming, but if we want to make one from scratch, that's a different type, etc. I'll be OK with that as well.
