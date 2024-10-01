@@ -744,7 +744,7 @@ sources/1 = SubResource("TileSetAtlasSource_1twpf")
 sources/2 = SubResource("TileSetAtlasSource_3ijio")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j253j"]
-radius = 15.91
+radius = 16.5176
 height = 66.07
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iuwch"]
@@ -758,6 +758,70 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Heart1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_dfd04"]
+resource_name = "Lose_Heart2"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_wdcue"]
+resource_name = "Lose_Heart3"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart3:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_pqoje"]
+resource_name = "Lose_Heart4"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart4:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_3ekat"]
+resource_name = "Lose_Heart5"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart5:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -830,70 +894,6 @@ tracks/4/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_dfd04"]
-resource_name = "Lose_Heart2"
-length = 0.08
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Heart2:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 3]
-}
-
-[sub_resource type="Animation" id="Animation_wdcue"]
-resource_name = "Lose_Heart3"
-length = 0.08
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Heart3:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 3]
-}
-
-[sub_resource type="Animation" id="Animation_pqoje"]
-resource_name = "Lose_Heart4"
-length = 0.08
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Heart4:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 3]
-}
-
-[sub_resource type="Animation" id="Animation_3ekat"]
-resource_name = "Lose_Heart5"
-length = 0.08
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Heart5:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 3]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lqokb"]
 _data = {
 "Lose_Heart1": SubResource("Animation_hd5gu"),
@@ -957,16 +957,12 @@ scale = Vector2(1.453, 1.453)
 script = ExtResource("7_eidh0")
 
 [node name="CollisionShape2D" parent="Node2D1" index="0"]
-position = Vector2(82.5877, 22.0234)
+position = Vector2(77.0819, 22.0234)
 shape = SubResource("CapsuleShape2D_j253j")
 
 [node name="Link" parent="Node2D1/CollisionShape2D" index="0"]
-position = Vector2(5.50586, 2.76566e-05)
+position = Vector2(11.0117, -1.43497e-05)
 scale = Vector2(1.74074, 1.74433)
-
-[node name="Camera2D" type="Camera2D" parent="Node2D1/CollisionShape2D/Link" index="0"]
-visible = false
-position = Vector2(177, -87)
 
 [node name="Node2D2" parent="." instance=ExtResource("8_umvrk")]
 position = Vector2(910, 516)
