@@ -1,7 +1,135 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpuj0fbejjlf7"]
+[gd_scene load_steps=10 format=3 uid="uid://cpuj0fbejjlf7"]
 
-[ext_resource type="Texture2D" uid="uid://bldexell8ws28" path="res://legend of zelda adventures of link pixel heart containers greeting card free printable easy diy geek birthday valentine's day love note geekery (2) (1) (1).png" id="1_nfv57"]
+[ext_resource type="Texture2D" uid="uid://bt7whuhmop2a" path="res://image (1).png" id="1_66bmu"]
+
+[sub_resource type="Animation" id="Animation_jucfv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2po24"]
+resource_name = "Gain_Heart"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_nfxql"]
+resource_name = "Lose_Heart"
+length = 0.07
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_wfiq6"]
+resource_name = "Lose_Heart2"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_74giw"]
+resource_name = "Lose_Heart3"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_c0bk0"]
+resource_name = "Lose_Heart4"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_slcdc"]
+resource_name = "Lose_Heart5"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7paf"]
+_data = {
+"Gain_Heart": SubResource("Animation_2po24"),
+"Lose_Heart1": SubResource("Animation_nfxql"),
+"Lose_Heart2": SubResource("Animation_wfiq6"),
+"Lose_Heart3": SubResource("Animation_74giw"),
+"Lose_Heart4": SubResource("Animation_c0bk0"),
+"Lose_Heart5": SubResource("Animation_slcdc"),
+"RESET": SubResource("Animation_jucfv")
+}
 
 [node name="Node2D" type="Sprite2D"]
-texture = ExtResource("1_nfv57")
+texture = ExtResource("1_66bmu")
 hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g7paf")
+}

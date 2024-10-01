@@ -5,149 +5,113 @@ var speed = 200  # Walking speed
 var run_speed = 400  # Running speed
 var gravity = 1200  # Gravity force to pull the player down
 var jump_force = -600  # Jump force to propel the player upwards
-var is_jumping = false  # Track if the player is jumping
-var is_running = false  # Track if the player is running
-var in_air = false  # Track if the character is mid-air
-var is_attacking = false  # Track if the player is attacking
-var facing_direction = "right"  # Track the player's facing direction
 
-# Health attributes
-var max_health = 5
-var current_health = max_health
+# State Variables
+var is_jumping = false
+var is_running = false
+var in_air = false
+var is_attacking = false
+var facing_direction = "right"
 
-# Reference to AnimationPlayer
-var animation_player: AnimationPlayer
+# Reference to AnimationPlayer for Link
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	# Find the AnimationPlayer node
-	animation_player = find_animation_player(self)
+	print("Link script starting...")
 	if animation_player:
-		print("AnimationPlayer found successfully!")
+		print("AnimationPlayer found at path: ", animation_player.get_path())
+		# Connect signal for animation completion
+		animation_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	else:
-		print("ERROR: AnimationPlayer not found in the scene tree!")
-
-func find_animation_player(node):
-	for child in node.get_children():
-		if child is AnimationPlayer:
-			return child
-		var found = find_animation_player(child)
-		if found:
-			return found
-	return null
+		print("ERROR: AnimationPlayer not found!")
 
 func _physics_process(delta):
-	apply_gravity(delta)
-	handle_movement()
-	handle_attack()
-	apply_movement()
-	update_animation()
-
-# Handle movement and jumping
-func handle_movement():
-	is_running = Input.is_action_pressed("run")
-	var current_speed
-	if is_running:
-		current_speed = run_speed
-	else:
-		current_speed = speed
-
-	# Handle horizontal movement if not attacking
+	# Prevent movement during attacks
 	if not is_attacking:
-		if Input.is_action_pressed("ui_right"):
-			velocity.x = current_speed
-			facing_direction = "right"
-		elif Input.is_action_pressed("ui_left"):
-			velocity.x = -current_speed
-			facing_direction = "left"
-		else:
-			velocity.x = 0  # Stop movement when no input
+		handle_movement(delta)
+	apply_gravity(delta)
+	apply_movement()
 
-	# Handle jumping
+	# Handle attack input separately
+	if Input.is_action_just_pressed("attack"):
+		handle_attack()
+
+# Handle player movement and jumping
+func handle_movement(_delta):
+	is_running = Input.is_action_pressed("run")
+	var current_speed = run_speed if is_running else speed
+
+	# Reset horizontal velocity
+	velocity.x = 0
+
+	# Walk or run left or right
+	if Input.is_action_pressed("ui_right"):
+		velocity.x = current_speed
+		facing_direction = "right"
+		if in_air:
+			play_animation("Jump_Right")
+		else:
+			play_animation("Run_Right" if is_running else "Walk_Right")
+	elif Input.is_action_pressed("ui_left"):
+		velocity.x = -current_speed
+		facing_direction = "left"
+		if in_air:
+			play_animation("Jump_Left")
+		else:
+			play_animation("Run_Left" if is_running else "Walk_Left")
+	else:
+		# Play idle animation if not moving
+		if not in_air:
+			play_animation("Idle_" + facing_direction.capitalize())
+
+	# Jumping
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_force
 		is_jumping = true
 		in_air = true
-		play_animation("Jump_" + facing_direction.capitalize())  # Trigger the jump animation once
+		play_animation("Jump_" + facing_direction.capitalize())
 
-# Handle attacks
-func handle_attack():
-	if Input.is_action_just_pressed("attack") and not is_attacking:
-		is_attacking = true
-		play_animation("Hit_" + facing_direction.capitalize())
-
-# Apply gravity when not on the ground
+# Apply gravity while not on the ground
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		in_air = true
 	else:
-		is_jumping = false
+		if is_jumping:
+			is_jumping = false
 		in_air = false
 		velocity.y = 0
 
-# Apply movement to the player
+# Apply movement based on velocity
 func apply_movement():
 	move_and_slide()
 
-# Update animations based on player actions
-func update_animation():
+# Handle attack input
+func handle_attack():
 	if not is_attacking:
-		if in_air:
-			# Jump animation should only play once when jump starts, not loop
-			pass  # No need to play jump again after triggering it in `handle_movement`
-		elif velocity.x != 0:
-			if is_running:
-				play_animation("Run_" + facing_direction.capitalize())
-			else:
-				play_animation("Walk_" + facing_direction.capitalize())  # Ensure walking works after sprinting
+		is_attacking = true
+		play_animation("Attack_" + facing_direction.capitalize())
+
+# Play a specific animation if it exists
+func play_animation(anim_name: String):
+	if animation_player and animation_player.has_animation(anim_name):
+		if not animation_player.is_playing() or animation_player.current_animation != anim_name:
+			animation_player.play(anim_name)
+	else:
+		print("WARNING: Animation '%s' not found in AnimationPlayer!" % anim_name)
+
+# Handle animation completion
+func _on_animation_finished(anim_name: String):
+	if anim_name.begins_with("Attack_"):
+		is_attacking = false
+	elif anim_name.begins_with("Jump_") and not in_air:
+		# Transition to idle or walk animation after landing
+		if velocity.x != 0:
+			play_animation("Walk_" + facing_direction.capitalize())
 		else:
 			play_animation("Idle_" + facing_direction.capitalize())
 
-	# Reset the attack flag once animation finishes
-	if is_attacking and animation_player and not animation_player.is_playing():
-		is_attacking = false
-
-# Play the given animation if it exists
-func play_animation(anim_name):
-	if animation_player != null:
-		if animation_player.has_animation(anim_name):
-			animation_player.play(anim_name)
-		else:
-			print("WARNING: Animation '", anim_name, "' not found!")
-	else:
-		print("ERROR: Attempted to play animation '", anim_name, "' but AnimationPlayer is null!")
-
-# Function to handle taking damage
-func take_damage(amount):
-	if current_health > 0:
-		current_health -= amount
-		if current_health < 0:
-			current_health = 0  # Health should not go below zero
-
-		# Update hearts display
-		update_health_ui()
-
-		# Check if the player is dead
-		if current_health == 0:
-			die()
-
-# Function to update the heart UI display
-func update_health_ui():
-	# Assuming there's a CanvasLayer node called HealthUI that contains the heart nodes
-	var health_ui = get_node("/root/Node2D/HealthUI")
-	if health_ui:
-		for i in range(max_health):
-			var heart = health_ui.get_child(i)
-			if i < current_health:
-				heart.visible = true
-			else:
-				heart.visible = false
-
-# Function to handle player's death
-func die():
-	print("Link has died.")
-	# Add any additional death handling logic here, such as restarting the level
-
-# Function to detect collisions with Gibdo
-func _on_body_entered(body):
-	if body.name == "Gibdo":
-		take_damage(1)
+# Function to handle Link getting attacked by Gibdo
+func _on_gibdo_attack():
+	print("Link was attacked by Gibdo.")
+	# Add damage handling logic here if needed in the future

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuhdefu2rrkuu"]
+[gd_scene load_steps=11 format=3 uid="uid://cuhdefu2rrkuu"]
 
 [ext_resource type="Texture2D" uid="uid://4xgpb7n3wmb0" path="res://image (1) (1).png" id="1_he2hr"]
 
@@ -208,6 +208,10 @@ _data = {
 "Walk_Right": SubResource("Animation_ekk3i")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ql1nh"]
+radius = 32.0
+height = 64.0
+
 [node name="Gibdo" type="Sprite2D"]
 texture = ExtResource("1_he2hr")
 hframes = 6
@@ -221,3 +225,9 @@ libraries = {
 "": SubResource("AnimationLibrary_qiblh")
 }
 speed_scale = 0.627
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 0)
+shape = SubResource("CapsuleShape2D_ql1nh")

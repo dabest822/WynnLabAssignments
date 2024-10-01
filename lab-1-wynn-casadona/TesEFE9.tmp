@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bmpp6kp1v5wh5"]
+[gd_scene load_steps=25 format=4 uid="uid://bmpp6kp1v5wh5"]
 
 [ext_resource type="Texture2D" uid="uid://bjwafq56o8h37" path="res://country-platform-files/layers/country-platform-back.png" id="1_rmt44"]
 [ext_resource type="Texture2D" uid="uid://bcp45yxlupt7t" path="res://country-platform-files/layers/country-platform-forest.png" id="2_ulslq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://pikdcl7wpt7v" path="res://Gibdo Full.tscn" id="8_umvrk"]
 [ext_resource type="Script" path="res://Gibdo Everything.gd" id="9_wujfj"]
 [ext_resource type="PackedScene" uid="uid://cpuj0fbejjlf7" path="res://Hearts.tscn" id="10_6agsf"]
+[ext_resource type="Script" path="res://Health.gd" id="10_s7o6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_knftd"]
 texture = ExtResource("5_d0yio")
@@ -982,10 +983,8 @@ shape = SubResource("CapsuleShape2D_iuwch")
 [node name="Gibdo" parent="Node2D2/CollisionShape2D2" index="0"]
 position = Vector2(-5.5, 0)
 
-[node name="CollisionShape2D4" parent="Node2D2/CollisionShape2D2/Gibdo/Area2D" index="0"]
-position = Vector2(3.15912, 0)
-
 [node name="HealthUI" type="CanvasLayer" parent="."]
+script = ExtResource("10_s7o6o")
 
 [node name="Heart1" parent="HealthUI" instance=ExtResource("10_6agsf")]
 position = Vector2(192, 40)
