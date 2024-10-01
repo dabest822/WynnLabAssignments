@@ -14,7 +14,7 @@ Ideally, you would jump over the platform and take down the Gibdo, but as of rig
 I learned a lot about Godot and game development in the past couple of weeks; originally inspired by a video series on YouTube of someone attempting to fully rebuild Super Mario World (SNES) in the Godot engine.
 It is very complex, but just like anything, practicing it more and more makes it easier. And it's free to use, which is good.
 As for questions I still have:
-- Is there any simple way to integrate a HealthUI, where if Link gets hit by moving into the attack range/Area2D of the Gibdo, then getting hit by said Gibdo, he loses a heart?
+- Is there any simple way to integrate a HealthUI, where if Link gets hit by moving into the attack range/Area2D of the Gibdo (which I still have to add), then getting hit by said Gibdo, he loses a heart?
         - And then there's the aspect of the Gibdo having its own health (possibly needing 1-3 hits to be taken down), which would be its own thing to keep track of.
 - Is there anything in my current setup (code, scene structure, or logic) that could lead to scaling issues or complications if I add more characters or expand the level in the future?
 - Is there a way in Godot to prioritize debug messages or outputs from specific scripts so that I can easily troubleshoot individual nodes?
