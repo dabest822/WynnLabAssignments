@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c31i8hyfnrttc"
-path="res://.godot/imported/far-grounds.png-cce1df2c1756cd5237f33597e5e4ce9b.ctex"
+uid="uid://4xgpb7n3wmb0"
+path="res://.godot/imported/image (1) (1).png-ee584b152baa12e3bbe3c5b935519217.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://far-grounds.png"
-dest_files=["res://.godot/imported/far-grounds.png-cce1df2c1756cd5237f33597e5e4ce9b.ctex"]
+source_file="res://Images/image (1) (1).png"
+dest_files=["res://.godot/imported/image (1) (1).png-ee584b152baa12e3bbe3c5b935519217.ctex"]
 
 [params]
 

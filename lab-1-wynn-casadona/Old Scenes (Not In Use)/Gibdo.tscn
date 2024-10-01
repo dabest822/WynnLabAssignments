@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuhdefu2rrkuu"]
 
-[ext_resource type="Texture2D" uid="uid://4xgpb7n3wmb0" path="res://image (1) (1).png" id="1_he2hr"]
+[ext_resource type="Texture2D" uid="uid://4xgpb7n3wmb0" path="res://Images/image (1) (1).png" id="1_he2hr"]
 
 [sub_resource type="Animation" id="Animation_0f2kc"]
 resource_name = "Attack_Left"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cpuj0fbejjlf7"]
 
-[ext_resource type="Texture2D" uid="uid://bt7whuhmop2a" path="res://image (1).png" id="1_66bmu"]
+[ext_resource type="Texture2D" uid="uid://bt7whuhmop2a" path="res://Images/image (1).png" id="1_66bmu"]
 
 [sub_resource type="Animation" id="Animation_2po24"]
 resource_name = "Gain_Heart"

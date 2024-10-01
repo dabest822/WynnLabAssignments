@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y3qq8i6i5fqb"
-path="res://.godot/imported/country-platform-preview.png-a9cbf11ba60a4e1dfaf7c163476316a6.ctex"
+uid="uid://s2iuqd0edim4"
+path="res://.godot/imported/sea.png-535758af6d15230dd2557f3c1386a5ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://country-platform-files/country-platform-preview.png"
-dest_files=["res://.godot/imported/country-platform-preview.png-a9cbf11ba60a4e1dfaf7c163476316a6.ctex"]
+source_file="res://Images/sea.png"
+dest_files=["res://.godot/imported/sea.png-535758af6d15230dd2557f3c1386a5ef.ctex"]
 
 [params]
 

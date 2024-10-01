@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bmsu1qywj03an"]
 
-[ext_resource type="Texture2D" uid="uid://c1wluj8pvwcx0" path="res://17364 (1).png" id="1_wka5y"]
+[ext_resource type="Texture2D" uid="uid://c1wluj8pvwcx0" path="res://Images/17364 (1).png" id="1_wka5y"]
 
 [sub_resource type="Animation" id="Animation_i7w1d"]
 resource_name = "Hit_Left"

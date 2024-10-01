@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bia8xypqwpiw4"]
 
-[ext_resource type="Texture2D" uid="uid://mo8xa3543yn5" path="res://tileset.png" id="1_41ov5"]
+[ext_resource type="Texture2D" uid="uid://mo8xa3543yn5" path="res://Images/tileset.png" id="1_41ov5"]
 
 [node name="Node2D" type="Node2D"]
 

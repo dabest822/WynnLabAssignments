@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dbcthvslplou8"]
 
-[ext_resource type="PackedScene" uid="uid://bmsu1qywj03an" path="res://Walking, Running, Jumping, Attacking.tscn" id="1_guwcq"]
+[ext_resource type="PackedScene" uid="uid://bmsu1qywj03an" path="res://Old Scenes (Not In Use)/Walking, Running, Jumping, Attacking.tscn" id="1_guwcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgqhg"]
 size = Vector2(26.4, 51.1292)

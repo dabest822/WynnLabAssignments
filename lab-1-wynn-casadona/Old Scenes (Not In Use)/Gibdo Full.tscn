@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://pikdcl7wpt7v"]
 
-[ext_resource type="PackedScene" uid="uid://cuhdefu2rrkuu" path="res://Gibdo.tscn" id="1_l5ewl"]
+[ext_resource type="PackedScene" uid="uid://cuhdefu2rrkuu" path="res://Old Scenes (Not In Use)/Gibdo.tscn" id="1_l5ewl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1ixu"]
 size = Vector2(40, 12)

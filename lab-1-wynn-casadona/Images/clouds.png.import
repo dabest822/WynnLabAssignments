@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdx50lle6j2ws"
-path="res://.godot/imported/Ruined Master Sword.png-f58d0c75ac3540e4746764a99566b874.ctex"
+uid="uid://b8pan8t0okulh"
+path="res://.godot/imported/clouds.png-b102af4d4084e02c7297dad263c16ffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ruined Master Sword.png"
-dest_files=["res://.godot/imported/Ruined Master Sword.png-f58d0c75ac3540e4746764a99566b874.ctex"]
+source_file="res://Images/clouds.png"
+dest_files=["res://.godot/imported/clouds.png-b102af4d4084e02c7297dad263c16ffb.ctex"]
 
 [params]
 
