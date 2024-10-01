@@ -982,6 +982,9 @@ shape = SubResource("CapsuleShape2D_iuwch")
 [node name="Gibdo" parent="Node2D2/CollisionShape2D2" index="0"]
 position = Vector2(-5.5, 0)
 
+[node name="CollisionShape2D4" parent="Node2D2/CollisionShape2D2/Gibdo/Area2D" index="0"]
+position = Vector2(3.15912, 0)
+
 [node name="HealthUI" type="CanvasLayer" parent="."]
 
 [node name="Heart1" parent="HealthUI" instance=ExtResource("10_6agsf")]
@@ -1008,6 +1011,8 @@ scale = Vector2(0.14434, 0.14434)
 libraries = {
 "": SubResource("AnimationLibrary_lqokb")
 }
+
+[connection signal="body_entered" from="Node2D2/CollisionShape2D2/Gibdo/Area2D" to="Node2D2" method="_on_area_2d_body_entered"]
 
 [editable path="Node2D1"]
 [editable path="Node2D1/CollisionShape2D/Link"]
