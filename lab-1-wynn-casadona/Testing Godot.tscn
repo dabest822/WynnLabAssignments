@@ -1005,6 +1005,8 @@ libraries = {
 "": SubResource("AnimationLibrary_lqokb")
 }
 
+[connection signal="animation_finished" from="Node2D2/CollisionShape2D2/Gibdo/AnimationPlayer2" to="Node2D2" method="_on_animation_player_2_animation_finished"]
+
 [editable path="Node2D1"]
 [editable path="Node2D1/CollisionShape2D/Link"]
 [editable path="Node2D2"]

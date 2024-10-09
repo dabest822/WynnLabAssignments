@@ -11,6 +11,8 @@ var facing_direction = "right"  # Track the player's facing direction
 
 var animation_player: AnimationPlayer
 
+var health = 5
+
 func _ready():
 	# Find the AnimationPlayer node
 	animation_player = find_animation_player(self)
@@ -115,3 +117,20 @@ func play_animation(anim_name):
 			print("WARNING: Animation '", anim_name, "' not found!")
 	else:
 		print("ERROR: Attempted to play animation '", anim_name, "' but AnimationPlayer is null!")
+
+#this is vetting a refrence to the animation player node
+@onready var health_animations: AnimationPlayer = $"../HealthUI/AnimationPlayer3"
+
+func take_damage(amount):
+	
+	#health keeps track of your health internally, the tricky part is updating the ui.
+	var heart_to_lose = health 
+	health-= amount
+	print(health, heart_to_lose)
+	printerr("This is an error message!")
+	health_animations.play(str("Lose_Heart",heart_to_lose))
+	#This plays the corresponding animation. It's backwards, but you could either fix that with slightly different math or just by reordering your hearts on screen.
+	
+
+	
+	
