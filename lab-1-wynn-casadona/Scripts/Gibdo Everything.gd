@@ -65,7 +65,8 @@ func handle_movement_and_attack():
 		else:
 			velocity.x = 0
 	
-	print("Distance to Link: ", distance_to_link, " Velocity: ", velocity, " Facing: ", facing_direction, " Attacking: ", is_attacking)
+	#print("Distance to Link: ", distance_to_link, " Velocity: ", velocity, " Facing: ", facing_direction, " Attacking: ", is_attacking)
+	
 
 func update_animation():
 	if not animation_player:
@@ -87,5 +88,16 @@ func update_animation():
 	else:
 		print("WARNING: Animation not found: ", anim_to_play)
 	
-	print("Current animation: ", animation_player.current_animation)
-	print("Is animation playing: ", animation_player.is_playing())
+	#print("Current animation: ", animation_player.current_animation)
+	#print("Is animation playing: ", animation_player.is_playing())
+
+#This waits until the attack animation finishes and then calls a take damage function.
+	
+func _on_animation_player_2_animation_finished(anim_name: StringName) -> void:
+	print(anim_name)
+	if anim_name == "Attack_Left" or anim_name == "Attack_Right":
+		print(anim_name)
+		
+	# typically it's easier to be able to say something like link.take_damage(1). However, since link is actually the sprite2d and the "Node2D1" actually has all the logic attached to itinstead we need to do this:
+
+		$"../Node2D1".take_damage(1)
